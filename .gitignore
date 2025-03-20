@@ -39,6 +39,7 @@ build/*
 CMakeFiles/*
 **/CMakeFiles/*
 *.cmake
+!medusa/scripts/medusa.cmake
 Makefile/*
 **/Makefile/*
 CMakeCache.txt
