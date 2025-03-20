@@ -404,12 +404,12 @@ int main(int argc, char **argv) {
     if (argc > 10)
         step_size_scale = atof(argv[10]);
 
-    // choose convection direction, see OseenDiscretizationBetter::setConvection for details
+    // choose convection direction, see OseenDiscretizationBetter::setSolution and OseenDiscretizationBetter::setConvection for details
     int conv = 0;
     if (argc > 11)
         conv = atoi(argv[11]);
 
-    // choose exact solution, see OseenDiscretizationBetter::setSolution for details
+    // choose exact solution, see OseenDiscretizationBetter::setSolution and OseenDiscretizationBetter::computeExactSolution for details
     int sol = 3;
     if (argc > 12)
         sol = atoi(argv[12]);
