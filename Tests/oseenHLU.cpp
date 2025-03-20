@@ -432,7 +432,7 @@ int main(int argc, char **argv) {
     file_base << "_step_size_scale_" << step_size_scale << "_conv_" << conv << "_sol_" << sol << "_pres_" << pressure_constraint;
 
     // compute for different separation distances
-    for (; dx_u > 1.0/120.0; dx_u/=1.2)
+    for (; dx_u > 1.0/21.0; dx_u/=1.2)
         test_strategy(dx_u, heps, file_base.str(), step_size_scale, 
             domain_name[domain_num], nu, seed, poly_grad, poly_lap, poly_conv, poly_div, conv, sol, pressure_constraint);
 
