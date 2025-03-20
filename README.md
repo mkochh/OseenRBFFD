@@ -1,6 +1,6 @@
 # OseenRBFFD
 ## Installation
-This project requires the CGAL [https://www.cgal.org/](https://www.cgal.org/). 
+This project requires the CGAL library ([https://www.cgal.org/](https://www.cgal.org/)). 
 Therefore, install CGAL (libcgal-dev or cgal-devel or similar depending on your OS with a packet manager).
 The Code should work with CGAL 6.x and 5.x (although tested only on 6.0.1 and 5.5.1), 
 it might also work with older versions, but this was not tested.
