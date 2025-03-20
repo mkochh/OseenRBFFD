@@ -24,6 +24,15 @@
 #.cmake
 cmake_install.cmake
 !scripts/*
+!include/Eigen/*
+!docs/Doxyfile
+!test/gtest-1.7.0/CHANGES
+!test/gtest-1.7.0/CONTRIBUTORS
+!test/gtest-1.7.0/LICENSE
+!test/gtest-1.7.0/README
+!test/gtest-1.7.0/configure
+!LICENSE
+
 *~
 
 #general dirs
