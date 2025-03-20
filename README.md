@@ -1,5 +1,7 @@
 # OseenRBFFD
 ## Installation
+This project is based on the libraries medusa ([https://e6.ijs.si/medusa/](https://e6.ijs.si/medusa/)) for for solving partial differential equations using meshless methods 
+and the H2Lib ([http://h2lib.org/](http://h2lib.org/)) for hierarchical matrices.
 This project requires the CGAL library ([https://www.cgal.org/](https://www.cgal.org/)). 
 The Code should work with CGAL 6.x and 5.x (although tested only on 6.0.1 and 5.5.1), 
 it might also work with older versions, but this was not tested.
