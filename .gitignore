@@ -38,7 +38,7 @@ build/*
 
 CMakeFiles/*
 **/CMakeFiles/*
-*.cmake
+cmake_install.cmake
 !medusa/scripts/medusa.cmake
 Makefile/*
 **/Makefile/*

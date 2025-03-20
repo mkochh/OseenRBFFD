@@ -21,7 +21,8 @@
 *.avi
 *.pyc
 *.h5
-*.cmake
+#.cmake
+cmake_install.cmake
 !scripts/*
 *~
 
