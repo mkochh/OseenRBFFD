@@ -1,9 +1,18 @@
 # OseenRBFFD
 ## Installation
 This project requires the CGAL library ([https://www.cgal.org/](https://www.cgal.org/)). 
-Therefore, install CGAL (libcgal-dev or cgal-devel or similar depending on your OS with a packet manager).
 The Code should work with CGAL 6.x and 5.x (although tested only on 6.0.1 and 5.5.1), 
 it might also work with older versions, but this was not tested.
+
+To install CGAL and other depencies on Ubuntu:
+```
+sudo apt-get install git g++ python3 cmake libhdf5-serial-dev doxygen graphviz libcgal-dev
+```
+
+or on OpenSuse:
+```
+sudo zypper install git gcc python3 cmake hdf5-devel doxygen graphviz cgal-devel
+```
 
 Next clone this repository:
 ```
@@ -11,17 +20,19 @@ git clone https://github.com/mkochh/OseenRBFFD
 ```
 
 ## Compilation
-You will need cmake and gcc.
-In the directory OseenRBFFD, run:
+Execute the follwing from your terminal to compile the code:
 ```
+cd OseenRBFFD
 cmake .
-make -j
+make
 ```
 
 Wait for compilation to finish. This might take some time when compiling the code for the first time.
+You can use `make -j` to allow make to use parallelization and speed up the process.
+Beware that this can be quite ressource intensive.
 
 ## Check that everything works:
-Go in to the directory Tests and run the executable `oseenHLU`:
+Execute the following form your terminal to run the executable `oseenHLU`:
 ```
 cd Tests
 ./oseenHLU
