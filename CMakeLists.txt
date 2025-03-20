@@ -1,6 +1,6 @@
 cmake_minimum_required(VERSION 3.25)
 
-project("H2LibExtended")
+project("MedusaH2LibExtended")
 
 # Set build type to release, if not specified.
 if(NOT CMAKE_BUILD_TYPE)
