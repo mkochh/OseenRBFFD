@@ -1,0 +1,30 @@
+add_library(operators
+        ../../include/medusa/bits/operators/UniformShapeStorage_fwd.hpp
+        ../../include/medusa/bits/operators/UniformShapeStorage.hpp
+        UniformShapeStorage.cpp
+        ../../include/medusa/bits/operators/RaggedShapeStorage_fwd.hpp
+        ../../include/medusa/bits/operators/RaggedShapeStorage.hpp
+        RaggedShapeStorage.cpp
+        ../../include/medusa/bits/operators/ShapeStorage_fwd.hpp
+        ../../include/medusa/bits/operators/ShapeStorage.hpp
+        ../../include/medusa/bits/operators/shape_flags.hpp
+        ../../include/medusa/bits/operators/printShapes.hpp
+        ../../include/medusa/bits/operators/computeShapes_fwd.hpp
+        ../../include/medusa/bits/operators/computeShapes.hpp
+        computeShapes.cpp
+        ../../include/medusa/bits/operators/ExplicitOperators_fwd.hpp
+        ../../include/medusa/bits/operators/ExplicitOperators.hpp
+        ExplicitOperators.cpp
+        ../../include/medusa/bits/operators/ExplicitVectorOperators_fwd.hpp
+        ../../include/medusa/bits/operators/ExplicitVectorOperators.hpp
+        ExplicitVectorOperators.cpp
+        ../../include/medusa/bits/operators/ImplicitOperators_fwd.hpp
+        ../../include/medusa/bits/operators/ImplicitOperators.hpp
+        ImplicitOperators.cpp
+        ../../include/medusa/bits/operators/ImplicitVectorOperators_fwd.hpp
+        ../../include/medusa/bits/operators/ImplicitVectorOperators.hpp
+        ImplicitVectorOperators.cpp
+        )
+target_link_libraries(operators assert types)
+
+register_library(operators)

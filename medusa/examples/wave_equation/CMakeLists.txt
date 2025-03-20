@@ -1,0 +1,1 @@
+declare_example(wave_equation_2D)

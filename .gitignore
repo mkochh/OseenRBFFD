@@ -1,0 +1,50 @@
+# Exclude C/CPP Object files and Dependency files
+*.o
+*.d
+
+# Exclude Library files
+*.a
+
+# Exclude H2Lib include files for the Makefile
+*.inc
+
+__pycache__
+
+# Exclude all Files from H2Lib Examples except C files
+**/H2Lib/Examples/*
+!**/H2Lib/Examples/*.c
+!**/H2Lib/Examples/CMakeLists.txt
+
+# Exclude all Files from H2Lib Tests except C files and the testsuite script
+**/H2Lib/Tests/*
+!**/H2Lib/Tests/*.c
+!**/H2Lib/Tests/testsuite.sh
+!**/H2Lib/Tests/CMakeLists.txt
+
+# Exclude executable
+Tests/oseenHLU
+
+# Exclude vscode settings
+.vscode
+
+# Exclude all PDF's and .tex files (only generated tikz images)
+*.pdf
+*.tex
+*.csv
+
+# Exclude build directory
+build/*
+**/build/*
+
+CMakeFiles/*
+**/CMakeFiles/*
+*.cmake
+Makefile/*
+**/Makefile/*
+CMakeCache.txt
+Makefile
+
+# Exclude shell script
+*.sh
+
+slurm_config.txt

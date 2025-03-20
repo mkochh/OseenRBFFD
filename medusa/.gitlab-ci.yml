@@ -1,0 +1,44 @@
+# only run on master & dev branches, when merging, or when running manually via web interface
+workflow:
+    rules:
+        - if: $CI_COMMIT_BRANCH == "dev"
+        - if: $CI_COMMIT_BRANCH == "master"
+        - if: $CI_PIPELINE_SOURCE == "merge_request_event"
+        - if: $CI_PIPELINE_SOURCE == "web"
+
+# build medusa on LTS ubuntu
+default:
+    image: ubuntu:22.04
+    
+tests:
+    before_script:
+        - apt-get update -qq && apt-get install -y cmake libhdf5-dev lsb-release libcgal-dev g++ python3 
+    script:
+        - lsb_release -a
+        - uname -mrs
+        - g++ -v
+        - ls -R /usr/lib/x86_64-linux-gnu/hdf5/serial/
+        - ./run_tests.py -c
+        - ./run_tests.py -t
+
+examples:
+    before_script:
+        - apt-get update -qq && apt-get install -y cmake libhdf5-dev lsb-release libcgal-dev g++ python3 
+    script:
+        - lsb_release -a
+        - uname -mrs
+        - g++ -v
+        - ls -R /usr/lib/x86_64-linux-gnu/hdf5/serial/
+        - ./run_tests.py -e
+
+style:
+    before_script:
+        - apt-get update -qq && apt-get install -y python3 
+    script:
+        - ./run_tests.py -s
+
+docs:
+    before_script:
+        - apt-get update -qq && apt-get install -y doxygen graphviz cmake python3
+    script:
+        - ./run_tests.py -d

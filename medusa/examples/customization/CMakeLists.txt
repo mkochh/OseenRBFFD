@@ -1,0 +1,3 @@
+declare_example(custom_operators_biharmonic RUN)
+declare_example(custom_stencils_visibility RUN)
+declare_example(custom_rbf RUN)

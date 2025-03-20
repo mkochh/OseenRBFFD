@@ -1,0 +1,2 @@
+declare_example(infinite_well_2D RUN)
+declare_example(infinite_well_3D)

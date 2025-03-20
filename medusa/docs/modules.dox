@@ -1,0 +1,102 @@
+/**
+
+@defgroup types Types
+Defines custom types, for working with vectors, scalar and vector fields and
+general containers.
+
+We define 4 custom types, Range, Vec, ScalarField and VectorField.
+
+Range is a general purpose container with some convenience methods added to std::vector.
+
+Vec is intended to be used for small vector, i.e. for a 3D vector quantity such as
+velocity or displacement. It is a typedef for Eigen vector with a few methods added
+via their plugin system.
+
+ScalarField is an array of scalars, usually one for each point in the domain.
+Under the hood, this is Eigen's VectorXd with some additional methods.
+
+VectorField is an array of vectors. Accessing it at one point gives a Vec,
+while accessing one component gives a ScalarField. Under the hood it extends
+Eigen's Matrix type so all operations are kept efficient.
+
+These last three types are compatible with all Eigen expression and can interchangeably be used
+with Eigen's Matrix types.
+
+@defgroup domains Domains
+Defines various shapes and domain discretization procedures.
+
+We separated the computation domain into two parts, its analytical description, which is called
+DomainShape and its discretization, called DomainDiscretization.
+
+Some basic domain shapes are added, as well as support for set-theoretic operations between them.
+They are usually dimension independent and can be assembled into decently complex structures
+for demonstration purposes.
+
+Support for 3D polytopes and proper CAD designs is intended. Additionally, we can import
+discretizations from HDF5 files.
+
+Once domain shape has been constructed, it can be discretized. Domain discretization
+contains nodes, their types and normals for boundary nodes.
+Types are positive for internal nodes and negative for boundary nodes.
+
+Domain discretizations can also be constructed using fill engines, improved via iterative methods
+and refined. Some stencil selection algorithms are supported as well.
+
+@defgroup approximations Approximations
+Contains various approximations for differential operators using
+monomials, RBFs, ...
+
+This is one of the core parts of the library, which supports defining approximations for
+partial differential operators. Many strong form meshless methods can be implemented this way,
+such as RBF-FD, DAM, MLSM, GFD, FDM, LRBFCM, DLSM, ...
+
+Approximations are modular and can be easily changed, from basis functions, weight functions,
+scaling, solvers, RBFs, stencil size, etc...
+
+More about this can be read on the @ref concepts page.
+
+@defgroup interpolants Interpolants
+Contains various interpolation schemes using scattered nodes ...
+
+@defgroup operators Operators
+Implements operators for intuitive equation notation.
+
+Shapes defined by the approximation can be computed with computeShapes functions,
+which has built in parallelization.
+
+Computed stencil weights / shape functions are stored in ShapeStorage and
+can be used to construct operators. These operators enable an intuitive and expressive
+syntax which directly corresponds to the mathematics notation.
+
+For implicit operators, one simply writes the equations:
+@snippet test/operators/ImplicitOperators_test.cpp Implicit syntax
+
+Explicit operators can be applied directly to scalar or vector fields:
+@snippet test/operators/ExplicitVectorOperators_test.cpp Explicit syntax
+
+@defgroup integrators Integrators
+Defines commonly used integrators for time stepping.
+
+Common methods for solving ODEs are also included as they can be used to solve PDEs with
+the method of lines. They also support iterators and solvers can be iterated over using
+range-based for loops.
+
+@defgroup io Input / Output
+Provides input / output capabilities for XML, CSV and HDF file formats.
+
+HDF5 file format is the bes supported and can be used to stores many custom types, such as domains,
+timers and sparse matrices with fast read and write support.
+
+@defgroup utils Utilities
+Various utilities related to memory management, random, strings, numerics, spatial search, etc ...
+
+This section includes many print operators. It is out philosophy that any object should be quickly
+printable, which is why we included print operators for many common C++ types as well as for most
+custom types.
+
+Spatial search structures such as k-d trees and k-d grids are also in this section.
+
+ */
+
+// vim: set ft=php:
+// vim: set spell spelllang=en:

@@ -1,0 +1,5 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<params>
+    <approximations sigma="30" n="9" m="9" />
+    <num dx="0.1" />
+</params>

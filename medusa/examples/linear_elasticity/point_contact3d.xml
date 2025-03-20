@@ -1,0 +1,5 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<params>
+    <phy E="1" nu="0.33" P="1" />
+    <num a="1" b="0.1" h="0.01" />
+</params>

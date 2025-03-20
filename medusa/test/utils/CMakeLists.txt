@@ -1,0 +1,6 @@
+declare_test(memutils FILES memutils_test.cpp)
+declare_test(numutils FILES numutils_test.cpp)
+declare_test(randutils FILES randutils_test.cpp)
+declare_test(stdtypesutils FILES stdtypesutils_test.cpp)
+declare_test(timer FILES Timer_test.cpp)
+declare_test(stopwatch FILES Stopwatch_test.cpp)

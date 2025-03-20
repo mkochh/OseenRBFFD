@@ -1,0 +1,9 @@
+<params>
+    <approx supp="25" num_monoms="2" k="3"/>
+    <case epsr="2" theta0="0.0" dx_cylinder="0.009" dx_omega="0.01" alpha="0.35" power="4"/>
+    <PML d="0.15" sigma="40.0" m="4.0"/>
+    <fourier wavelength="0.2"/>
+    <geometry r="0.85" a="0.2"/>
+    <solver ffact="40" droptol="1e-5" errtol="1e-15" maxiter="9000"/>
+    <IO outfile="dielectric_cylinder"/>
+</params>

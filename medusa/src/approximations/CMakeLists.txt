@@ -1,0 +1,45 @@
+add_library(approximations
+        ../../include/medusa/bits/approximations/Gaussian_fwd.hpp
+        ../../include/medusa/bits/approximations/Gaussian.hpp
+        Gaussian.cpp
+        ../../include/medusa/bits/approximations/RBFBasis_fwd.hpp
+        ../../include/medusa/bits/approximations/RBFBasis.hpp
+        RBFBasis.cpp
+        ../../include/medusa/bits/approximations/Monomials_fwd.hpp
+        ../../include/medusa/bits/approximations/Monomials.hpp
+        Monomials.cpp
+        ../../include/medusa/bits/approximations/Operators_fwd.hpp
+        ../../include/medusa/bits/approximations/Operators.hpp
+        ../../include/medusa/bits/approximations/WeightFunction_fwd.hpp
+        ../../include/medusa/bits/approximations/WeightFunction.hpp
+        WeightFunction.cpp
+        ../../include/medusa/bits/approximations/ScaleFunction.hpp
+        ScaleFunction.cpp
+        ../../include/medusa/bits/approximations/WLS_fwd.hpp
+        ../../include/medusa/bits/approximations/WLS.hpp
+        WLS.cpp
+        ../../include/medusa/bits/approximations/WLSApproximant_fwd.hpp
+        ../../include/medusa/bits/approximations/WLSApproximant.hpp
+        WLSApproximant.cpp
+        ../../include/medusa/bits/approximations/RBFFD_fwd.hpp
+        ../../include/medusa/bits/approximations/RBFFD.hpp
+        RBFFD.cpp
+        ../../include/medusa/bits/approximations/JacobiSVDWrapper_fwd.hpp
+        ../../include/medusa/bits/approximations/JacobiSVDWrapper.hpp
+        JacobiSVDWrapper.cpp
+        ../../include/medusa/bits/approximations/Multiquadric_fwd.hpp
+        ../../include/medusa/bits/approximations/Multiquadric.hpp
+        Multiquadric.cpp
+        ../../include/medusa/bits/approximations/InverseMultiquadric_fwd.hpp
+        ../../include/medusa/bits/approximations/InverseMultiquadric.hpp
+        InverseMultiquadric.cpp
+        ../../include/medusa/bits/approximations/Polyharmonic_fwd.hpp
+        ../../include/medusa/bits/approximations/Polyharmonic.hpp
+        Polyharmonic.cpp
+        ../../include/medusa/bits/approximations/RBFInterpolant_fwd.hpp
+        ../../include/medusa/bits/approximations/RBFInterpolant.hpp
+        RBFInterpolant.cpp
+        )
+target_link_libraries(approximations assert types)
+
+register_library(approximations)

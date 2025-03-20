@@ -1,0 +1,1 @@
+declare_example(nonNewtonian_fluid RUN)

@@ -1,0 +1,60 @@
+/**
+
+@mainpage
+<div class="mainpage">
+<h1>Main page</h1>
+
+This is the technical API documentation of the Medusa library.
+For an overview of the library visit <a href="http://e6.ijs.si/medusa/">our page</a>
+or the [wiki](http://e6.ijs.si/medusa/wiki/).
+
+The source code is available through our <a href="https://gitlab.com/e62Lab/medusa">Gitlab repository</a>.
+<div>
+  Our code has all kind of safety assertions built in, and may therefore run slower
+  than expected. These assertions help catch errors during development phase of the PDE solution.
+  After you have verified the correctness of your implementation, the `NDEBUG` definition
+  can be specified to the compiled (by using e. g. `-DNDEBUG`) to get better execution times.
+</div>
+
+<h2>Getting started</h2>
+If you are running a linux system (e.g. Ubuntu), run the usual clone, build, test sequence:
+```
+sudo apt-get install git g++ cmake libhdf5-dev
+git clone git@gitlab.com:e62Lab/medusa.git --branch master --single-branch
+cd medusa
+mkdir -p build && cd build
+cmake ..
+make medusa_run_tests
+```
+to set up the library.
+
+For building on other systems and troubleshooting refer to the
+[Installation and building guide](http://e6.ijs.si/medusa/wiki/index.php/How_to_build)
+
+See [this page](http://e6.ijs.si/medusa/wiki/index.php/Including_this_library_in_your_project)
+for instructions on using this library in your project.
+
+<h2>Concepts</h2>
+Some concepts used by Medusa library, such as scalar/vector field, approximation engine,
+RBFs, etc. are described on page @ref concepts. Users can often supply their own classes
+instead of the ones included in Medusa for various operations, as long as they conform to the
+specified interface.
+
+<h2>Examples</h2>
+For first time users, we wrote a <a href="http://e6.ijs.si/medusa/tutorial">tutorial</a> on using
+Medusa to solve the Poisson equation. If you wish to dive into more field-specific examples, feel
+free to browse the [`medusa/examples`](https://gitlab.com/e62Lab/medusa/tree/master/examples/)
+folder included in the repository.  Each example can be run from `build/` directory or as a
+standalone executable. Scripts for plotting are also included.  More information on the philosophy
+of examples and how to run them can be found
+[here](http://www-e6.ijs.si/medusa/wiki/index.php/Philosophy_of_examples_and_how_to_run_them).  Some
+examples of solution of basic PDEs using Medusa have additional explanation on the <a
+href="http://e6.ijs.si/medusa/wiki/index.php/Medusa#Examples">wiki</a>, where you can also find
+additional use cases.
+
+Finally, some basic examples are located in folder `medusa/test/end2end` which also serve as unit tests.
+</div>
+ */
+
+// vim: set ft=php:
+// vim: set spell spelllang=en:

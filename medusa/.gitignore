@@ -1,0 +1,69 @@
+*
+!/**/
+!*.*
+
+# general files
+*.o
+*.a
+*.d
+*.prf
+*.gch
+*.old
+*.mp4
+*.png
+*.xcf
+*.tmp
+*.ps1
+*.jpg
+*.png
+*.mat
+*.mp4
+*.avi
+*.pyc
+*.h5
+*.cmake
+*~
+
+#general dirs
+generated
+html
+latex
+xml
+bin
+lib
+obj
+main
+*build*
+*/docs/doxygen_sqlite3.db
+icna/
+images/
+/test/testdata/M.csv
+/test/testdata/M2.csv
+/test/testdata/v.csv
+/test/testdata/v2.csv
+/scripts/__pycache__/
+/include/unsupported
+examples/*/*data.m
+**/CMakeFiles/*
+
+# Grega local
+local/*
+
+# Maks local
+/.remote
+
+# Jure local
+.idea
+/.ycm_extra_conf.py
+/.ycm_extra_conf.pyc
+/scripts/doxygen-1.8.8-1-x86_64.pkg.tar.xz
+createheader.py
+
+# Jure B. local
+.DS_Store
+/test/testdata/example.csv
+
+# Mitja local
+.clang-format
+*.code-workspace
+.vscode/

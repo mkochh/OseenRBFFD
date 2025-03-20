@@ -1,0 +1,1 @@
+declare_example(poisson_coupled_domains RUN)

@@ -1,0 +1,193 @@
+namespace mm {
+
+/**
+
+@page concepts Concepts
+
+Concepts are general patterns that certain classes follow
+or require their members to follow.
+The most important ones are described below.
+
+@section rbf-concept Radial Basis Function concept
+This concept represents a radial basis function as
+a function of squared radial distance from the origin, ie.\ a function @f$f@f$ mapping
+@f[ r^2 \mapsto f(r^2) @f]
+
+The only requirements are that the class is default constructible,
+has a `scalar_t` member type, that denotes the type used for numerical computations (eg. `double`)
+and has the operators:
+
+- `scalar_t operator()(scalar_t r2) const` evaluates function at given squared radial distance
+- `scalar_t operator()(scalar_t r2, int derivative) const` evaluates given derivative wrt. `r2` at given squared radial distance
+- `template <int dim> scalar_t operator()(scalar_t r2, Lap<dim>) const` evaluates Laplacian wrt. `r` at given squared radial distance
+
+Classes Gaussian, Multiquadric, InverseMultiquadric and Polyharmonic satisfy this concept.
+
+@section scale-concept Scale function concept
+This represents a scaling function that computes the appropriate scaling to the local support domain.
+It requires a class to implement a single method
+
+- `template<vec_t> static typename vec_t::scalar_t scale(const vec_t& p, const std::vector<vec_t>& support)`
+
+which returns local scale of this neighbourhood. For a neighbourhood of `{0, -h, h}`, `h` would be the appropriate local scale.
+Support nodes are assumed to be ordered by distance from `p`.
+
+Classes NoScale, ScaleToClosest, ScaleToFarthest satisfy this concept.
+
+@section weight-concept Weight function concept
+This concept represents a weight function used for weighted least squares solving.
+The function returns a non-negative scalar for all inputs.
+
+Classes satisfying this concept must be default constructible and provide member types `scalar_t`,
+`vector_t`, and static value `dim`, representing types used for numerical computation,
+and dimensionality of the function domain. Additionally, this method must be provided:
+
+- `scalar_t operator()(const vector_t& point) const`
+
+which evaluates the weight function.
+
+Classes NoWeight and RBFWeight satisfy this concept. Specific instance of RBFWeight,
+namely GaussianWeight is defined for Gaussian RBFs, because of common usage.
+
+@section basis-concept Basis function concept
+This concept represents a (local or global) basis over a neighbourhood of points.
+
+Classes satisfying this concept must be default constructible and provide member types `scalar_t`,
+`vector_t`, and static value `dim`, representing types used for numerical computation,
+and dimensionality of the function domain. Additionally, these four methods must be provided:
+
+- `scalar_t eval(int index, const vector_t& point, const std::vector<vector_t>& support) const`
+- `template <typename operator_t> scalar_t evalOp(int index, const vector_t& point, const operator_t& op, const std::vector<vector_t>& support, scalar_t scale) const`
+- `scalar_t evalAt0(int index, const std::vector<vector_t>& support) const;`
+- `template <typename operator_t> scalar_t evalOpAt0(int index, const operator_t& op, const std::vector<vector_t>& support) const;`
+
+allowing evaluation of `i`-th basis member in given point or at 0 and arbitrary operators.
+The special methods for evaluation at 0 are commonly used in approximation computations
+and are usually simpler and faster than general methods, which are not needed in that case.
+Support nodes are assumed to be ordered by distance from `p`.
+
+Classes Monomials and RBFBasis satisfy this concept.
+
+@section operator-family-concept Operator family concept
+An operator family is a (finite) collection of operators. Each operator family
+must have an `operator_t` type, defining the type of operators in the family.
+For convenience when printing, methods `name` and `type_name` must be defined,
+giving human readable names. Additionally, a collection of all operators
+in the family must be available through `operators` method, its size is given by `size()`,
+and the index of an operator in this family can be computed using the `index` method.
+
+In summary, the following methods must be defined:
+
+- `std::string name() const;`
+- `static int size();`
+- `static std::string type_name();`
+- `static std::array<operator_t, size> operators();`  // can return other iterables
+- `static int index(operator_t o);`  // can take const &
+
+The first four are used by @ref computeShapes to compute approximations,
+while the last one is used by ExplicitOperators and ImplicitOperators to get the index of operator
+in storage. The `index` method must also be compatible with `operators`, in the sense that
+for the list of operators `o`, returned by `operators`, it must hold that `index(o[i]) == i`
+for each `i`, i.e. the operators must be given in order by the `operators` method.
+
+The @ref computeShapes method only computes approximations for families of operators,
+however, inheriting from the `Operator` class will introduce all the required methods for 1-element
+families.
+
+Classes Der1s, Der2s, Lap, Der1, Der2, Derivative, Biharmonic satisfy this concept.
+
+@section operator-concept Operator concept
+This concept represents a (differential) operator, which can be applied to basis functions (see
+the @ref basis-concept above) and for which approximations can be computed using
+approximation engines (see @ref approx-concept below).
+
+The basis itself can know how to compute the given operator, but if it does not,
+the appropriate one of two methods that are required by this concept will be implemented.
+
+- <code>template \<typename basis_t> typename basis_t::scalar_t apply(
+        const basis_t& basis, int index, typename basis_t::vector_t point,
+        const std::vector<typename basis_t::vector_t>& support,
+        typename basis_t::scalar_t scale) const;</code>
+
+- <code>template \<typename basis_t> typename basis_t::scalar_t applyAt0(
+        const basis_t& basis, int index,
+        const std::vector<typename basis_t::vector_t>& support,
+        typename basis_t::scalar_t scale) const;</code>
+
+These methods should implement applying the operator to `i`-th member of the basis.
+Support nodes are assumed to be ordered by distance from the central point (`point` or `0`).
+See Operators class for more details.
+Additionally, the operator must define the `std::string name() const;` method for printing.
+
+This allows implementation of custom operators in such a way, that if you only use
+`MQ` basis functions, you operator only need to know how to be applied specifically to
+`MQ` basis. Custom operator approximation can be obtained using ShapeStorage::get
+and used with ExplicitOperators::apply, ImplicitOperators::apply, ExplicitVectorOperators::apply,
+ImplicitVectorOperators::apply.
+
+@section approx-concept Approximation engine concept
+This concept represents an approximation engine for approximating
+differential operators in neighborhood of points.
+
+Given a point @f$p@f$ with neighbours @f$p_1, \dots, p_n@f$, called _support_,
+an operator @f$\mathcal{L}@f$ is approximated as
+@f[ (\mathcal{L}{u})(p) \approx \sum_{i=1}^n w_i u(p_i). @f]
+The weights @f$w_i@f$ are called stencil weights of the _shape function_ for operator
+@f$\mathcal{L}@f$ at points @f$p@f$.
+
+Approximation engines are classes that compute operator and function approximations.
+Operator approximations are often called  "stencil weights" or "shape function".
+They must provide member types `scalar_t` and `vector_t`, and static value `dim`,
+representing types used for numerical computation and dimensionality of the function domain.
+Additionally, these three methods must be provided:
+
+- `void compute(const vector_t& point, const std::vector<vector_t>& support)`,
+- `Eigen::Matrix<scalar_t, Eigen::Dynamic, 1> getShape() const` and
+- `template <operator_t> Eigen::Matrix<scalar_t, Eigen::Dynamic, 1> getShape(const operator_t& op) const`
+- `FunctionType getApproximant(const vector_t& point, const std::vector<vector_t>& support,
+        const Eigen::MatrixBase<Derived>& values) const`
+
+The compute step prepares the engine for approximation of operators around point `point`
+with given support `support` and is usually computationally more intense.
+Support nodes are assumed to be ordered by distance from `point`.
+The `getShape()` step computes the shape for given basic differential operator or
+the evaluation operator (first overload).
+The `getApproximant` method returns the function approximant around given point.
+
+Typical usage is illustrated below:
+@code
+ApproximationEngine engine(...);
+double h = 0.1;
+engine.compute({0.0, 0.0}, {{0.0, 0.0}, {-h, 0.0}, {h, 0.0}, {0.0, h}, {0.0, -h}});
+VectorXd shape = engine.getShape();
+VectorXd shape = engine.getShape(Lap());  // shape for Laplacian
+@endcode
+
+Classes WLS and RBFFD satisfy this concept.
+
+@section ss-concept Shape storage concept
+This concept represents classes used for storing computed shape functions for different domain nodes.
+Their intention os to store the shape functions more compactly than if stored in `vector<vector<double>>`.
+
+Classes UniformShapeStorage and RaggedShapeStorage satisfy this concept. See also
+ShapeStorage for CRTP inheritable interface.
+
+Typical usage:
+@snippet UniformShapeStorage_test.cpp Uniform shape storage usage example
+
+@section linsolve-concept Linear solver concept
+This class represents a linear solver and follows the Eigen's
+[Linear algebra and decompositions](https://eigen.tuxfamily.org/dox/group__TutorialLinearAlgebra.html).
+The linear solver class must be default constructible and
+have two methods
+
+- `void compute(const Matrix& M)`
+- `Vector solve(const Vector& rhs)`
+
+The class JacobiSVDWrapper and most Eigen's decompositions follow this concept.
+
+*/
+}
+
+// vim: set ft=php:
+// vim: set spell spelllang=en:
