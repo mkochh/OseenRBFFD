@@ -14,6 +14,7 @@ set(LINK_LIBRARIES m)
 add_definitions(-DHARITH_RKMATRIX_QUICK_EXIT)
 
 # Add BLAS library to linked libraries
+set(BLA_VENDOR OpenBLAS)
 find_package(BLAS)
 if(BLAS_FOUND)
   message("-- " ${BLAS_LIBRARIES})

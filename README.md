@@ -6,12 +6,12 @@ it might also work with older versions, but this was not tested.
 
 To install CGAL and other depencies on Ubuntu:
 ```
-sudo apt-get install git g++ python3 cmake libhdf5-serial-dev doxygen graphviz libcgal-dev
+sudo apt-get install git g++ python3 cmake libhdf5-serial-dev doxygen graphviz libcgal-dev libopenblas-dev
 ```
 
 or on OpenSuse:
 ```
-sudo zypper install git gcc python3 cmake hdf5-devel doxygen graphviz cgal-devel
+sudo zypper install git gcc python3 cmake hdf5-devel doxygen graphviz cgal-devel openblas-devel
 ```
 
 Next clone this repository:
