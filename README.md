@@ -28,8 +28,10 @@ make
 ```
 
 Wait for compilation to finish. This might take some time when compiling the code for the first time.
-You can use `make -j` to allow make to use parallelization and speed up the process.
-Beware that this can be quite ressource intensive.
+You can use `make -j n` to allow make to use parallelization and speed up the process, where `n` is the number of threads to parallize on.
+Beware that this can be quite ressource intensive, if `n` is close to your maximal number of threads.
+
+If you get compile errors regarding HDF5, please check [https://e6.ijs.si/medusa/wiki/index.php/How_to_build#HDF5](https://e6.ijs.si/medusa/wiki/index.php/How_to_build#HDF5) for a guide on how to fix this.
 
 ## Check that everything works:
 Execute the following form your terminal to run the executable `oseenHLU`:
