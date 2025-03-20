@@ -39,13 +39,8 @@ build/*
 CMakeFiles/*
 **/CMakeFiles/*
 *.cmake
-!**/medusa/scripts/medusa.cmake
+!medusa/scripts/medusa.cmake
 Makefile/*
 **/Makefile/*
 CMakeCache.txt
 Makefile
-
-# Exclude shell script
-*.sh
-
-slurm_config.txt

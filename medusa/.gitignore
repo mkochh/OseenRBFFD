@@ -22,6 +22,7 @@
 *.pyc
 *.h5
 *.cmake
+!scripts/*
 *~
 
 #general dirs
