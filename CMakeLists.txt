@@ -60,8 +60,8 @@ endif()
 
 # Build Extensions
 # Set flags for debugging or optimization.
-set(CMAKE_CXX_FLAGS "-std=c++17 -fopenmp -Wall -Wextra -Wno-unused-function -Wno-maybe-uninitialized -Wno-deprecated-copy -Wno-deprecated-declarations -Wno-overloaded-virtual -g -O3")
-set(CMAKE_C_FLAGS "-fopenmp -Wall -Wextra -Wno-unused-function -Wno-maybe-uninitialized -Wno-deprecated-copy -Wno-deprecated-declarations -Wno-overloaded-virtual -g -O3")
+set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -std=c++17 -Wall -Wextra -Wno-unused-function -Wno-maybe-uninitialized -Wno-deprecated-copy -Wno-deprecated-declarations -Wno-overloaded-virtual -g -O3")
+set(CMAKE_C_FLAGS "{CMAKE_C_FLAGS} -Wall -Wextra -Wno-unused-function -Wno-maybe-uninitialized -Wno-deprecated-copy -Wno-deprecated-declarations -Wno-overloaded-virtual -g -O3")
 
 set(extension_headers)
 set(extension_sources)
