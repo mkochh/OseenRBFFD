@@ -166,6 +166,7 @@ Block_HLU_Prcd::Block_HLU_Prcd(mm::DomainDiscretization<mm::Vec3d> d_u,
 
     del_hmatrix(Bhat1);
     del_hmatrix(Bhat2);
+    del_hmatrix(Temp);
   }
 
   // Set total times for the schur complement computation
@@ -201,6 +202,7 @@ Block_HLU_Prcd::~Block_HLU_Prcd()
   del_block(this->block_grad);
 
   del_cluster(this->root_velocity);
+  delete[] this->root_pressure->son[0]->idx;
   del_cluster(this->root_pressure);
 
   delete[] this->idxu;
